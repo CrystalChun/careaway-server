@@ -1,9 +1,10 @@
 var user = require('./users');
 var security = require('./security');
 
-function Patient (firstname, lastname, diagnosis, username, password, securityQ1, securityA1, securityQ2, securityA2, securityQ3, securityA3) {
+function Patient (firstname, lastname, diagnosis, username, password, salt, securityQ1, securityA1, securityQ2, securityA2, securityQ3, securityA3) {
     user.username = username;
     user.password = password;
+    user.salt = salt;
     security.securityQ1 = securityQ1;
     security.securityA1 = securityA1;
     security.securityQ2 = securityQ2;
@@ -16,6 +17,7 @@ function Patient (firstname, lastname, diagnosis, username, password, securityQ1
     this.diagnosis = diagnosis || '';
     this.username = user.username || '';
     this.password = user.password || '';
+    this.salt = user.salt || '';
     this.securityQ1 = security.securityQ1 || '';
     this.securityA1 = security.securityA1 || '';
     this.securityQ2 = security.securityQ2 || '';

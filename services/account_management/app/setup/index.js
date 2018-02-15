@@ -1,7 +1,9 @@
-const userModel = require('@accountModels/user');
+const userModel = require('@models/users');
+const dbConnection = require('@dataAccess/db_connection');
 
 const models = {
-    User: userModel
+	db: new dbConnection().Connect(),
+    User: userModel()
 }
 
-modules.exports = models;
+module.exports = models;

@@ -17,6 +17,9 @@ Currently in the package.json:
 * module-alias
 * helmet
 * cors
+* promise
+* mongodb
+* consign
 ## Module Aliases
 #### Description
 The `module-alias` library allows the following aliases to be used throughout the files on the server. It encapsulates the routes to each of these locations within the server to make the importing files both cleaner and less error-prone.
