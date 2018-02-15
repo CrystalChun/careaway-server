@@ -4,4 +4,4 @@ const models = {
     User: userModel
 }
 
-modules.exports = models;
+module.exports = models;

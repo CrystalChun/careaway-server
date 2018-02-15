@@ -1,5 +1,5 @@
+const config = require('@treatmentConfig');
 module.exports = (app) => {
-    app.route('/').get({
-        
-    })
+    const api = app.treatment_management.app.api.treatment_creator;
+    app.route(config.routes.create).post(api.create());
 }

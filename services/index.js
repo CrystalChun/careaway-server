@@ -1,5 +1,7 @@
 require('module-alias/register');
 const http = require('http');
+const httpProxy = require('http-proxy');
+const httpProxyRules = require('http-proxy-rules');
 
 // APIs
 const accountAPI = require('@accountAPI');
@@ -35,3 +37,26 @@ appointmentServer.listen(appointmentPORT, () => {
 treatmentServer.listen(treatmentPORT, () => {
     console.log(`Treatment manager API running on port ${treatmentPORT}.`);
 });
+
+const host = 'http://localhost:';
+const accountURL = `${host}${accountPORT}`;
+const treatmentURL = `${host}${treatmentPORT}`;
+const appointmentURL = `${host}${appointmentPORT}`;
+
+// Create proxy server
+const proxyRules = new httpProxyRules({
+    rules: {
+        '.*/login' : `${accountURL}${accountConfig.routes.login}`,
+        '.*/create-appointment' : `${appointmentURL}${appointmentConfig.routes.create}`,
+        '.*/create-treatment' : `${treatmentURL}${treatmentConfig.routes.create}`
+    },
+    default: `${host}8080`
+});
+const proxy = httpProxy.createProxyServer({});
+
+const server = http.createServer((req, res) => {
+    let target = proxyRules.match(req);
+    console.log(target);
+    proxy.web(req, res, {target: target});
+});
+server.listen(8080);

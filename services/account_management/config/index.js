@@ -5,7 +5,7 @@ module.exports = {
         dbName: 'users'
     },
     routes: {
-        login: '/account/api/authentication/',
+        login: '/account/api/authentication',
         register: '/account/api/registration'
     },
     server: {
